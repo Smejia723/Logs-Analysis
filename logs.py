@@ -1,4 +1,5 @@
 import psycopg2
+
 DB_NAME="news"
 
 # what are the most popular three articles of all time?
@@ -16,8 +17,6 @@ query_2="""select authors.name,
     concat( E'/article/',articles.slug)
     and articles.author = authors.id group by authors.name
     order by views desc;"""
-
-
 
 # On which days did more than 1% of requests lead to errors
 query_3="""select Date,Total,Error,
@@ -51,7 +50,6 @@ def popular_article(query_1):
     # Close the connection
     db.close()
 
-
 def popular_authors(query_2):
     """Prints most popular article authors of all time"""
     db=connect()
@@ -63,7 +61,6 @@ def popular_authors(query_2):
         print "\""+result[i][0]+"\" - "+str(
             result[i][1])+" views"
     db.close()
-
 
 def log_status(query_3):
     """Print days on which more than 1% of requests lead to errors"""
@@ -77,7 +74,6 @@ def log_status(query_3):
             result[i][0])+" - "+str(
             round(result[i][3], 2))+"% errors"
     db.close()
-
 
 if __name__ == '__main__':
 
