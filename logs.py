@@ -30,8 +30,11 @@ query_3 = """select Date,Total,Error,
 
 # Fetch tables from the database.
 # Connect to the database news
+
+
 def connect():
     return psycopg2.connect("dbname=news")
+
 
 def popular_article(query_1):
     """Prints most popular three articles of all time"""
@@ -43,12 +46,11 @@ def popular_article(query_1):
     c.execute(query_1)
     # Command to fetch the results
     result = c.fetchall()
-    print "\nPopular Articles:\n"
-    for i in range(0, len(result), 1):
-      print "\""+result[i][0]+"\" - "+str(
-          result[i][1])+" views"
+    print "\nPopular Articles:\n" for i in range(0, len(result), 1):
+        print "\""+result[i][0]+"\" - "+str(result[i][1])+" views"
     # Close the connection
     db.close()
+
 
 def popular_authors(query_2):
     """Prints most popular article authors of all time"""
@@ -58,9 +60,9 @@ def popular_authors(query_2):
     result = c.fetchall()
     print "\nPopular Authors:\n"
     for i in range(0, len(result), 1):
-      print "\""+result[i][0]+"\" - "+str(
-          result[i][1])+" views"
+        print "\""+result[i][0]+"\" - "+str(result[i][1])+" views"
     db.close()
+
 
 def log_status(query_3):
     """Print days on which more than 1% of requests lead to errors"""
@@ -69,11 +71,10 @@ def log_status(query_3):
     c.execute(query_3)
     result = c.fetchall()
     print "\nDays with more than 1% of errors:\n"
-    for i in range(0,len(result), 1):
-      print str(
-          result[i][0])+" - "+str(
-          round(result[i][3], 2))+"% errors"
+    for i in range(0, len(result), 1):
+        print str(result[i][0])+" - "+str(round(result[i][3], 2))+"% errors"
     db.close()
+
 
 if __name__ == '__main__':
     print popular_article(query_1)
