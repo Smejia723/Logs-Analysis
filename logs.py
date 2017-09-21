@@ -1,14 +1,17 @@
+import os
+import sys
 import psycopg2
 
 DB_NAME = "news"
 
 # what are the most popular three articles of all time?
-query_1 = """select articles.title, count (*) as views
-    from articles join log on articles.slug =
-    (regexp_split_to_array(path, E'/article/')) [2]
-    where path != '/' group by
-    (regexp_split_to_array(path, E'/article/')) [2],
-    articles.title order by views desc limit 3;"""
+query_1 = """select articles.title, agglog.asviews
+    from articles join (select path,
+    count(*) asviews
+    from log group by path)
+    as agglog on articles.slug = (regexp_split_to_array (
+    path, E'/article/')) [2]
+    where path != '/' order by agglog.asviews desc limit 3;"""
 
 # Who are the most popular article authors of all time?
 query_2 = """select authors.name,
@@ -46,7 +49,8 @@ def popular_article(query_1):
     c.execute(query_1)
     # Command to fetch the results
     result = c.fetchall()
-    print "\nPopular Articles:\n" for i in range(0, len(result), 1):
+    print "\nPopular Articles:\n"
+    for i in range(0, len(result), 1):
         print "\""+result[i][0]+"\" - "+str(result[i][1])+" views"
     # Close the connection
     db.close()
@@ -77,6 +81,6 @@ def log_status(query_3):
 
 
 if __name__ == '__main__':
-    print popular_article(query_1)
-    print popular_authors(query_2)
-    print log_status(query_3)
+    popular_article(query_1)
+    popular_authors(query_2)
+    log_status(query_3)
