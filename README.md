@@ -16,7 +16,7 @@ Start the VM from gitbash:
   1.  Within the VM, navigate to cd ~/Downloads/FSND-Virtual-Machine/vagrant
   2.  Run vagrant up
   3.  Run vagrant ssh
-  3.  Connect to the database by running psql -d news
+  3.  Connect to the database by running psql -d news -f newsdata.sql
   4.  run python logs.py
   5.  enjoy results of the three awensers
   5.  Exit VM with ctrl D when finished enjoying
@@ -25,4 +25,9 @@ Start the VM from gitbash:
 1. Virtual machine
 2. git bash
 3. newsdata.sql
-4. logs.py
+4. python
+5. logs.py
+6. psycopg2 library
+7. PostgreSQL
+8. vagrant
+9. fsnd-virtual-machine zip file from udacity
