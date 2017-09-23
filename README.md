@@ -16,7 +16,7 @@ Start the VM from gitbash:
   1.  Within the VM, navigate to cd ~/Downloads/FSND-Virtual-Machine/vagrant
   2.  Run vagrant up
   3.  Run vagrant ssh
-  3.  Connect to the database by running psql -d news -f newsdata.sql
+  3.  Connect to the database by running 'psql -d news -f newsdata.sql'
   4.  run python logs.py
   5.  enjoy results of the three awensers
   5.  Exit VM with ctrl D when finished enjoying
